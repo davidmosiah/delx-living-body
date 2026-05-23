@@ -1,0 +1,14 @@
+node_modules/
+dist/
+.env
+.env.*
+*.log
+*.sqlite
+*.sqlite-journal
+.DS_Store
+coverage/
+.delx-living-body/
+/tmp/
+
+# MCP Registry local auth tokens
+.mcpregistry_*_token

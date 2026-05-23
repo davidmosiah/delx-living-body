@@ -1,0 +1,3 @@
+[mcp_servers.living-body]
+command = "npx"
+args = ["-y", "delx-living-body"]

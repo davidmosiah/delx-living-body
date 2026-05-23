@@ -1,0 +1,9 @@
+# Local deployment metadata must never ship in npm packages.
+.vercel/
+.github/
+scripts/
+src/
+tsconfig.json
+*.sqlite
+.env
+.env.*
