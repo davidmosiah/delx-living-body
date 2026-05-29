@@ -1,0 +1,42 @@
+════════════════════════════════════════════════════════════════
+delx-living-body — "What should I do today?" (end-to-end demo)
+════════════════════════════════════════════════════════════════
+Installed (mock) connectors: WHOOP, Oura, Garmin
+Snapshot: recovery 74 · sleep 83 · body battery 68 · load normal
+
+1) living_body_status — detected wearable connectors:
+   whoop, oura, garmin
+
+2) living_body_ask  question="What should I do today?"
+────────────────────────────────────────────────────────────────
+Recommendation:
+   Today at a glance: recovery 74, sleep 83, body battery 68.
+
+Confidence: high   Sources: whoop, oura, garmin
+
+Reasoning trace (rule-based, no LLM):
+   Intent classified as: daily_overview
+   Sources used: whoop, oura, garmin
+
+   Heuristics fired:
+   - (rec_high) Recovery 74 supports a high-intensity day.
+   - (sleep_good) Sleep score 83 is supporting recovery.
+────────────────────────────────────────────────────────────────
+
+3) living_body_ask  question="Should I train hard today?"
+────────────────────────────────────────────────────────────────
+Recommendation:
+   Green light for a hard session. Recovery and sleep both support high intensity.
+
+Confidence: high   Sources: whoop, oura, garmin
+
+Reasoning trace (rule-based, no LLM):
+   Intent classified as: training_readiness
+   Sources used: whoop, oura, garmin
+
+   Heuristics fired:
+   - (rec_high) Recovery 74 supports a high-intensity day.
+   - (sleep_good) Sleep score 83 is supporting recovery.
+────────────────────────────────────────────────────────────────
+
+OK — 3 connectors composed per question, confidence=high, zero LLM calls.

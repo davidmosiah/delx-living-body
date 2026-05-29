@@ -1,6 +1,6 @@
 {
   "name": "delx-living-body",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Meta-MCP server that auto-detects and composes installed Delx Wellness connectors into a unified body data layer.",
   "type": "module",
   "bin": {
@@ -25,11 +25,12 @@
     "start": "node dist/index.js",
     "dev": "tsx src/index.ts",
     "smoke": "node scripts/smoke-tools.mjs",
+    "demo": "node scripts/demo.mjs",
     "test:detector": "node scripts/test-detector.mjs",
     "test:composer": "node scripts/test-composer.mjs",
     "test:synthesizer": "node scripts/test-synthesizer.mjs",
     "test:metadata": "node scripts/metadata-check.mjs",
-    "test": "npm run typecheck && npm run build && npm run smoke && npm run test:detector && npm run test:composer && npm run test:synthesizer && npm run test:metadata",
+    "test": "npm run typecheck && npm run build && npm run smoke && npm run test:detector && npm run test:composer && npm run test:synthesizer && npm run demo && npm run test:metadata",
     "prepublishOnly": "npm test"
   },
   "keywords": [

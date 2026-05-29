@@ -4,6 +4,13 @@ All notable changes to `delx-living-body` are documented here.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and this project follows semantic versioning.
 
+## [0.2.0] - 2026-05-29
+
+### Added
+
+- **Runnable end-to-end demo** (`npm run demo`, `scripts/demo.mjs`): boots the real MCP server over stdio, fakes three installed connectors (WHOOP + Oura + Garmin) using the bundled stub child with synthetic body data, and answers "What should I do today?" and "Should I train hard today?" — composing all three sources into one synthesized answer with no accounts, API keys, or network. Captured output committed at `examples/demo-what-should-i-do-today.txt`; the demo carries assertions and now runs as part of `npm test`.
+- README "See it answer" quickstart promoting the demo as the Body-vertical entrypoint.
+
 ## [0.1.0] - 2026-05-23
 
 Initial release.

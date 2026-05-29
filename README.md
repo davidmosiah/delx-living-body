@@ -23,6 +23,45 @@ npx -y delx-living-body
 
 That's the whole install. No OAuth flow, no API keys — `delx-living-body` has no auth of its own. Each child connector handles its own credentials.
 
+## See it answer "What should I do today?" (no accounts needed)
+
+```bash
+git clone https://github.com/davidmosiah/delx-living-body && cd delx-living-body
+npm install && npm run build
+npm run demo
+```
+
+The demo boots the **real** MCP server, fakes three installed connectors
+(WHOOP + Oura + Garmin, backed by a bundled stub child that carries synthetic
+body data), and drives it over stdio exactly the way an agent does. No real
+accounts, API keys, or network. Captured output lives at
+[`examples/demo-what-should-i-do-today.txt`](examples/demo-what-should-i-do-today.txt):
+
+```
+2) living_body_ask  question="What should I do today?"
+────────────────────────────────────────────────────────────────
+Recommendation:
+   Today at a glance: recovery 74, sleep 83, body battery 68.
+
+Confidence: high   Sources: whoop, oura, garmin
+
+3) living_body_ask  question="Should I train hard today?"
+────────────────────────────────────────────────────────────────
+Recommendation:
+   Green light for a hard session. Recovery and sleep both support high intensity.
+
+Confidence: high   Sources: whoop, oura, garmin
+
+Reasoning trace (rule-based, no LLM):
+   Intent classified as: training_readiness
+   - (rec_high) Recovery 74 supports a high-intensity day.
+   - (sleep_good) Sleep score 83 is supporting recovery.
+```
+
+One question in → one synthesized answer composed across all three connectors,
+with a stable reasoning trace and **zero LLM calls**. This is the Body-vertical
+entrypoint: install once, ask in plain language, get a unified answer.
+
 ## Tools (6)
 
 | Tool | Purpose |
