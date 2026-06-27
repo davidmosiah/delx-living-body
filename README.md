@@ -27,7 +27,7 @@ Delx Wellness path easier for other AI builders to find.
 - **Try it now, no accounts** — `npx -y delx-living-body demo` ("Should I train hard today?")
 - **Run it in** Claude · Cursor · ChatGPT · Hermes · OpenClaw — see [agent setup examples](https://github.com/davidmosiah/delx-wellness/tree/main/examples)
 - **Local-first** — `delx-living-body` never reads your tokens; children read their own creds ([privacy](#privacy--security))
-- **Which connector should I use?** — start at the [Delx Wellness front door](https://github.com/davidmosiah/delx-wellness)
+- **Which connector should I use?** — start at the [Delx Wellness front door](https://github.com/davidmosiah/delx-wellness#which-connector-should-i-use)
 
 The three flagship connectors this composes over: **[google-health-mcp](https://github.com/davidmosiah/google-health-mcp)** (`google-health-mcp-unofficial`), **[garmin-mcp](https://github.com/davidmosiah/garmin-mcp)** (`garmin-mcp-unofficial`), and **[wellness-nourish](https://github.com/davidmosiah/wellness-nourish)** (`wellness-nourish`).
 
