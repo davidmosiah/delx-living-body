@@ -4,6 +4,12 @@ All notable changes to `delx-living-body` are documented here.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and this project follows semantic versioning.
 
+## [0.2.1] - 2026-06-27
+
+### Security
+
+- Pin transitive `hono` resolution to `4.12.27` via npm overrides, resolving production audit advisories while keeping the public MCP API unchanged.
+
 ## [0.2.0] - 2026-05-29
 
 ### Added

@@ -1,6 +1,6 @@
 {
   "name": "delx-living-body",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Meta-MCP server that auto-detects and composes installed Delx Wellness connectors into a unified body data layer.",
   "type": "module",
   "bin": {

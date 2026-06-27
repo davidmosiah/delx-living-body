@@ -1,5 +1,5 @@
 export const SERVER_NAME = "living-body-mcp-server";
-export const SERVER_VERSION = "0.2.0";
+export const SERVER_VERSION = "0.2.1";
 export const NPM_PACKAGE_NAME = "delx-living-body";
 export const PINNED_NPM_PACKAGE = `${NPM_PACKAGE_NAME}@${SERVER_VERSION}`;
 export const MCP_NAME = "io.github.davidmosiah/delx-living-body";
