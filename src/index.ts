@@ -6,6 +6,7 @@ import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js"
 import { StreamableHTTPServerTransport } from "@modelcontextprotocol/sdk/server/streamableHttp.js";
 import { SERVER_NAME, SERVER_VERSION } from "./constants.js";
 import { runCliCommand } from "./cli/commands.js";
+import { runDemoStubChild } from "./cli/demo-stub-child.js";
 import { registerLivingBodyTools } from "./tools/living-body-tools.js";
 
 function createServer(): McpServer {
@@ -62,19 +63,32 @@ async function runHttp(): Promise<void> {
   });
 }
 
-const args = new Set(process.argv.slice(2));
-let cliResult: number | undefined;
+async function main(): Promise<void> {
+  const args = new Set(process.argv.slice(2));
 
-try {
-  cliResult = await runCliCommand(process.argv.slice(2));
-} catch (error) {
-  console.error(`Error: ${(error as Error).message}`);
-  process.exitCode = 1;
-}
+  // Hidden subcommand: stub wearable child MCP spawned internally by `demo`.
+  // It runs its own stdio server and must not fall through to the real server.
+  if (process.argv[2] === "__demo-stub-child") {
+    await runDemoStubChild();
+    return;
+  }
 
-if (cliResult !== undefined) {
-  process.exitCode = cliResult;
-} else if (process.exitCode === undefined) {
+  let cliResult: number | undefined;
+
+  try {
+    cliResult = await runCliCommand(process.argv.slice(2));
+  } catch (error) {
+    console.error(`Error: ${(error as Error).message}`);
+    process.exitCode = 1;
+  }
+
+  if (cliResult !== undefined) {
+    process.exitCode = cliResult;
+    return;
+  }
+
+  if (process.exitCode !== undefined) return;
+
   const transport = process.env.LIVING_BODY_MCP_TRANSPORT ?? (args.has("--http") ? "http" : "stdio");
   if (transport === "http") {
     await runHttp();
@@ -82,3 +96,5 @@ if (cliResult !== undefined) {
     await runStdio();
   }
 }
+
+await main();

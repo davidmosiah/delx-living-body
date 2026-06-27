@@ -4,6 +4,17 @@ All notable changes to `delx-living-body` are documented here.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and this project follows semantic versioning.
 
+## [0.3.0] - 2026-06-27
+
+### Added
+
+- Package-installed zero-secret demo command: `npx -y delx-living-body demo`.
+- Hidden bundled stub child MCP used by the demo so the published package can
+  run the real server, composer and synthesizer path without WHOOP, Oura,
+  Garmin, accounts, API keys, or network access.
+- Red/green demo scenarios for proving both "train hard" and "back off"
+  readiness paths from the shipped binary.
+
 ## [0.2.1] - 2026-06-27
 
 ### Security

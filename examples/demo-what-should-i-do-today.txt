@@ -1,6 +1,7 @@
 ════════════════════════════════════════════════════════════════
-delx-living-body — "What should I do today?" (end-to-end demo)
+delx-living-body — "Should I train hard today?" (end-to-end demo)
 ════════════════════════════════════════════════════════════════
+Scenario: green
 Installed (mock) connectors: WHOOP, Oura, Garmin
 Snapshot: recovery 74 · sleep 83 · body battery 68 · load normal
 

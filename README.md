@@ -22,6 +22,17 @@ Install it once. Get a unified body data layer. Works with whatever wellness MCP
 If it helps your agent workflow, star the repo. Stars make the single-entry
 Delx Wellness path easier for other AI builders to find.
 
+---
+
+- **Try it now, no accounts** — `npx -y delx-living-body demo` ("Should I train hard today?")
+- **Run it in** Claude · Cursor · ChatGPT · Hermes · OpenClaw — see [agent setup examples](https://github.com/davidmosiah/delx-wellness/tree/main/examples)
+- **Local-first** — `delx-living-body` never reads your tokens; children read their own creds ([privacy](#privacy--security))
+- **Which connector should I use?** — start at the [Delx Wellness front door](https://github.com/davidmosiah/delx-wellness)
+
+The three flagship connectors this composes over: **[google-health-mcp](https://github.com/davidmosiah/google-health-mcp)** (`google-health-mcp-unofficial`), **[garmin-mcp](https://github.com/davidmosiah/garmin-mcp)** (`garmin-mcp-unofficial`), and **[wellness-nourish](https://github.com/davidmosiah/wellness-nourish)** (`wellness-nourish`).
+
+---
+
 ## Install
 
 ```bash
@@ -30,18 +41,18 @@ npx -y delx-living-body
 
 That's the whole install. No OAuth flow, no API keys — `delx-living-body` has no auth of its own. Each child connector handles its own credentials.
 
-## See it answer "What should I do today?" (no accounts needed)
+## See the full agent demo → "Should I train hard today?" (no accounts needed)
 
 ```bash
-git clone https://github.com/davidmosiah/delx-living-body && cd delx-living-body
-npm install && npm run build
-npm run demo
+npx -y delx-living-body demo
 ```
 
-The demo boots the **real** MCP server, fakes three installed connectors
-(WHOOP + Oura + Garmin, backed by a bundled stub child that carries synthetic
-body data), and drives it over stdio exactly the way an agent does. No real
-accounts, API keys, or network. Captured output lives at
+One command, no clone. The demo boots the **real** MCP server, fakes three
+installed connectors (WHOOP + Oura + Garmin, backed by a bundled stub child that
+carries synthetic body data), and drives it over stdio exactly the way an agent
+does. No real accounts, API keys, or network. Add `--scenario=red` to see the
+low-readiness ("back off today") path; `demo --help` lists options. Captured
+output lives at
 [`examples/demo-what-should-i-do-today.txt`](examples/demo-what-should-i-do-today.txt):
 
 ```
@@ -169,6 +180,7 @@ living-body-mcp-server --http         # Local HTTP transport
 living-body-mcp-server doctor         # Detect installed connectors
 living-body-mcp-server doctor --json  # JSON output
 living-body-mcp-server setup          # Print profile path + install hints
+living-body-mcp-server demo           # Zero-secret end-to-end demo (--scenario=red, --help)
 living-body-mcp-server version
 ```
 

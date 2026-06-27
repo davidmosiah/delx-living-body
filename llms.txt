@@ -3,10 +3,12 @@ Meta-MCP server that composes installed Delx Wellness connectors (WHOOP, Oura, G
 Repository: https://github.com/davidmosiah/delx-living-body
 NPM: https://www.npmjs.com/package/delx-living-body
 Primary command: npm exec --yes --package=delx-living-body -- living-body-mcp-server doctor
+Demo command: npm exec --yes --package=delx-living-body -- delx-living-body demo
 MCP command: living-body-mcp-server
 
 - MCP registry name: io.github.davidmosiah/delx-living-body
 - Synthesis is rule-based and offline. living-body never calls an LLM.
+- Zero-secret demo: `delx-living-body demo` boots the real MCP server with bundled synthetic WHOOP/Oura/Garmin children. No accounts, API keys, or network.
 - living_body_ask spawns child connector processes. Always pass explicit_user_intent=true.
 - Tools (6): living_body_status, living_body_ask, living_body_daily_brief, living_body_compose_context, living_body_health_check, living_body_capabilities.
 - Detection: scans ~/.<vendor>-mcp/ for tokens.json or config.json, checks export paths, reads optional ~/.delx-wellness/profile.json.

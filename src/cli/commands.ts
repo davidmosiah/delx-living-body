@@ -2,10 +2,12 @@ import { homedir } from "node:os";
 import { join } from "node:path";
 import { KNOWN_CONNECTORS, NPM_PACKAGE_NAME, SERVER_VERSION } from "../constants.js";
 import { detect, installHint } from "../services/detector.js";
+import { runDemo } from "./demo.js";
 
 export async function runCliCommand(args: string[]): Promise<number | undefined> {
   const [command, ...rest] = args;
   if (!command || command === "--http") return undefined;
+  if (command === "demo") return runDemo(rest);
   if (command === "setup") return runSetup(rest);
   if (command === "doctor" || command === "status") return runDoctor(rest);
   if (command === "version" || command === "--version" || command === "-v") {
@@ -77,6 +79,8 @@ Usage:
   living-body-mcp-server doctor         Detect installed connectors (alias: status)
   living-body-mcp-server doctor --json  JSON output
   living-body-mcp-server setup          Print shared-profile path and per-connector install hints
+  living-body-mcp-server demo           Run the zero-secret end-to-end demo ("Should I train hard today?")
+  living-body-mcp-server demo --help    Demo options (e.g. --scenario=red)
   living-body-mcp-server version        Print server version
 
 Env:
