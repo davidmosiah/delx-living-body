@@ -3,9 +3,11 @@
 > Meta-MCP that turns 15 wellness MCPs into one unified body data layer for AI agents.
 
 [![npm](https://img.shields.io/npm/v/delx-living-body)](https://www.npmjs.com/package/delx-living-body)
+[![GitHub Release](https://img.shields.io/github/v/release/davidmosiah/delx-living-body?label=release)](https://github.com/davidmosiah/delx-living-body/releases/latest)
 [![npm downloads](https://img.shields.io/npm/dm/delx-living-body)](https://www.npmjs.com/package/delx-living-body)
 [![license](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Delx Wellness](https://img.shields.io/badge/part%20of-Delx%20Wellness-0EA5A3)](https://github.com/davidmosiah/delx-wellness)
+[![Verified Release Index](https://img.shields.io/badge/verified-release_index-0EA5A3)](https://github.com/davidmosiah/delx-wellness/blob/main/docs/release-index.md)
 
 Today, answering "should I train hard today?" forces an agent to orchestrate WHOOP recovery, Garmin Body Battery, Oura sleep, Nourish nutrition, and cycle phase across five separate MCP servers. That's brittle for users and confusing for the agent.
 
