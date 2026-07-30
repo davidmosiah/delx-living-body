@@ -9,6 +9,7 @@ import { runCliCommand } from "./cli/commands.js";
 import { runDemoStubChild } from "./cli/demo-stub-child.js";
 import { registerLivingBodyResources } from "./resources/living-body-resources.js";
 import { registerLivingBodyTools } from "./tools/living-body-tools.js";
+import { registerLivingBodyPrompts } from "./prompts/living-body-prompts.js";
 
 function createServer(): McpServer {
   const server = new McpServer({
@@ -17,6 +18,7 @@ function createServer(): McpServer {
   });
   registerLivingBodyTools(server);
   registerLivingBodyResources(server);
+  registerLivingBodyPrompts(server);
   return server;
 }
 

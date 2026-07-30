@@ -1,3 +1,9 @@
+## 0.3.3 - 2026-07-30
+
+### Added / Fixed
+
+- MCP prompts: daily_checkin, triage_setup, ask_compose.
+
 ## 0.3.1 - 2026-07-30
 
 ## 0.3.2 - 2026-07-30
