@@ -203,15 +203,20 @@ export function registerLivingBodyTools(server: McpServer): void {
     "living_body_daily_brief",
     {
       title: "Living Body — Daily Brief",
-      description: "Synthetic daily briefing aggregating each detected connector's daily summary/context.",
+      description: "Synthetic daily briefing aggregating each detected connector's daily summary/context. Spawns child MCP processes — requires explicit_user_intent: true.",
       inputSchema: DailyBriefInputSchema.shape,
       outputSchema: DailyBriefOutputSchema.shape,
       annotations: { readOnlyHint: true, destructiveHint: false, idempotentHint: false, openWorldHint: true }
     },
     async (params) => {
       try {
+        if (params.explicit_user_intent !== true) {
+          return makeError(
+            "USER_ACTION_REQUIRED: explicit_user_intent must be true for living_body_daily_brief (spawns child wellness MCP processes)."
+          );
+        }
         const detection = detect();
-        const privacyMode = resolvePrivacyMode(params.privacy_mode, false);
+        const privacyMode = resolvePrivacyMode(params.privacy_mode, true);
         const results = await composeAcrossDetected(detection.detected, {
           privacyMode,
           sources: params.sources,
@@ -238,15 +243,20 @@ export function registerLivingBodyTools(server: McpServer): void {
     "living_body_compose_context",
     {
       title: "Living Body — Compose Context",
-      description: "Return the normalized delx-wellness-context/v1 shape merged across all detected sources.",
+      description: "Return the normalized delx-wellness-context/v1 shape merged across all detected sources. Spawns child MCP processes — requires explicit_user_intent: true.",
       inputSchema: ComposeContextInputSchema.shape,
       outputSchema: ComposeContextOutputSchema.shape,
       annotations: { readOnlyHint: true, destructiveHint: false, idempotentHint: false, openWorldHint: true }
     },
     async (params) => {
       try {
+        if (params.explicit_user_intent !== true) {
+          return makeError(
+            "USER_ACTION_REQUIRED: explicit_user_intent must be true for living_body_compose_context (spawns child wellness MCP processes)."
+          );
+        }
         const detection = detect();
-        const privacyMode = resolvePrivacyMode(params.privacy_mode, false);
+        const privacyMode = resolvePrivacyMode(params.privacy_mode, true);
         const results = await composeAcrossDetected(detection.detected, {
           privacyMode,
           sources: params.sources

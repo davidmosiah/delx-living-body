@@ -65,6 +65,7 @@ export const AskOutputSchema = z.object({
 
 export const DailyBriefInputSchema = z.object({
   sources: z.array(ConnectorIdSchema).optional(),
+  explicit_user_intent: ExplicitUserIntentSchema,
   privacy_mode: PrivacyModeValueSchema.optional(),
   response_format: ResponseFormatSchema
 }).strict();
@@ -84,6 +85,7 @@ export const DailyBriefOutputSchema = z.object({
 
 export const ComposeContextInputSchema = z.object({
   sources: z.array(ConnectorIdSchema).optional(),
+  explicit_user_intent: ExplicitUserIntentSchema,
   privacy_mode: PrivacyModeValueSchema.optional(),
   response_format: ResponseFormatSchema
 }).strict();

@@ -67,8 +67,16 @@ try {
   assert.equal(hc.structuredContent?.total_known, 15);
   assert.ok(hc.structuredContent?.connectors?.some((c) => c.install_hint?.startsWith('npx -y ')), 'missing connectors should expose install_hint');
 
-  // compose_context with no children installed => empty per_source, unknown training load
-  const ctx = await client.callTool({ name: 'living_body_compose_context', arguments: { response_format: 'json' } });
+  // compose_context requires explicit_user_intent (spawns child MCPs)
+  const gated = await client.callTool({ name: 'living_body_compose_context', arguments: { response_format: 'json' } });
+  const gatedText = JSON.stringify(gated) + (gated.content?.map((c) => c.text || '').join('') || '');
+  assert.match(gatedText, /USER_ACTION_REQUIRED|explicit_user_intent/i);
+
+  // compose_context with intent + no children installed => empty per_source, unknown training load
+  const ctx = await client.callTool({
+    name: 'living_body_compose_context',
+    arguments: { explicit_user_intent: true, response_format: 'json' }
+  });
   assert.equal(ctx.structuredContent?.context_contract_version, 'delx-wellness-context/v1');
   assert.equal(ctx.structuredContent?.recent_training_load, 'unknown');
 

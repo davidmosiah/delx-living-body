@@ -1,5 +1,12 @@
 ## 0.3.1 - 2026-07-30
 
+## 0.3.2 - 2026-07-30
+
+### Security
+
+- living_body_daily_brief and living_body_compose_context require explicit_user_intent (spawn child MCPs).
+
+
 ### Added
 
 - Agent-readiness surface: `living_body_agent_manifest`, `living_body_connection_status`, `living_body_data_inventory` plus MCP resources for inventory/manifest/capabilities/connection-status.
