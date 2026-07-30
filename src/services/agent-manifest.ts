@@ -4,6 +4,9 @@ export const AGENT_CLIENTS = ["generic", "claude", "cursor", "windsurf", "hermes
 export type AgentClientName = typeof AGENT_CLIENTS[number];
 
 const TOOLS = [
+  "living_body_agent_manifest",
+  "living_body_connection_status",
+  "living_body_data_inventory",
   "living_body_status",
   "living_body_ask",
   "living_body_daily_brief",
@@ -22,6 +25,14 @@ export function buildAgentManifest(client: AgentClientName = "generic") {
     mcp_name: MCP_NAME,
     client,
     unofficial: true,
+    recommended_first_calls: [
+      "living_body_agent_manifest",
+      "living_body_connection_status",
+      "living_body_status",
+      "living_body_capabilities",
+      "living_body_data_inventory"
+    ],
+    standard_tools: TOOLS,
     package: {
       name: NPM_PACKAGE_NAME,
       version: SERVER_VERSION,
@@ -32,6 +43,7 @@ export function buildAgentManifest(client: AgentClientName = "generic") {
     composes: KNOWN_CONNECTORS.map((c) => ({ id: c.id, package: c.package, display_name: c.display_name })),
     tools: TOOLS,
     agent_rules: [
+      "Call living_body_agent_manifest or living_body_connection_status on first contact.",
       "Call living_body_status before living_body_ask to know which connectors are installed.",
       "Always pass explicit_user_intent: true on living_body_ask — it spawns child MCP processes.",
       "Use privacy_mode='structured' (default). Only use 'raw' when the user explicitly asks for vendor payloads.",

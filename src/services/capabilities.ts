@@ -32,6 +32,9 @@ export function buildCapabilities() {
       { mode: "raw", use_when: "Caller explicitly requested full upstream payloads and set explicit_user_intent." }
     ],
     tools: [
+      { name: "living_body_agent_manifest", summary: "Install + operating instructions for agents (recommended first call)." },
+      { name: "living_body_connection_status", summary: "Ready/not-ready snapshot of local connector detection without spawning data tools." },
+      { name: "living_body_data_inventory", summary: "Static inventory of composed domains and known connectors." },
       { name: "living_body_status", summary: "Detected wellness connectors on this machine, plus per-connector detection method." },
       { name: "living_body_ask", summary: "Compose installed connectors to answer a wellness question. Spawns subprocesses — requires explicit_user_intent." },
       { name: "living_body_daily_brief", summary: "Synthetic daily briefing aggregating every detected connector's daily_summary." },
@@ -49,9 +52,10 @@ export function buildCapabilities() {
       daily_summary_tool: c.daily_summary_tool
     })),
     recommended_agent_flow: [
-      "Call living_body_capabilities once to discover the surface.",
-      "Call living_body_status to see which connectors are installed.",
-      "Use living_body_compose_context for raw merged context, or living_body_ask for a synthesized answer.",
+      "Call living_body_agent_manifest once to discover install and operating rules.",
+      "Call living_body_connection_status or living_body_status to see which connectors are installed.",
+      "Call living_body_capabilities or living_body_data_inventory for the surface map.",
+      "Use living_body_compose_context for merged context, or living_body_ask for a synthesized answer.",
       "Use living_body_health_check when you need install hints for missing connectors.",
       "Always pass explicit_user_intent=true on living_body_ask — it spawns child MCP processes."
     ],

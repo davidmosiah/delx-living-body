@@ -7,6 +7,7 @@ import { StreamableHTTPServerTransport } from "@modelcontextprotocol/sdk/server/
 import { SERVER_NAME, SERVER_VERSION } from "./constants.js";
 import { runCliCommand } from "./cli/commands.js";
 import { runDemoStubChild } from "./cli/demo-stub-child.js";
+import { registerLivingBodyResources } from "./resources/living-body-resources.js";
 import { registerLivingBodyTools } from "./tools/living-body-tools.js";
 
 function createServer(): McpServer {
@@ -15,6 +16,7 @@ function createServer(): McpServer {
     version: SERVER_VERSION
   });
   registerLivingBodyTools(server);
+  registerLivingBodyResources(server);
   return server;
 }
 

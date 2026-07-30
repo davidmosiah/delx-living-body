@@ -6,6 +6,9 @@ import { Client } from '@modelcontextprotocol/sdk/client/index.js';
 import { StdioClientTransport } from '@modelcontextprotocol/sdk/client/stdio.js';
 
 const expectedTools = [
+  'living_body_agent_manifest',
+  'living_body_connection_status',
+  'living_body_data_inventory',
   'living_body_status',
   'living_body_ask',
   'living_body_daily_brief',
@@ -40,10 +43,25 @@ try {
 
   const caps = await client.callTool({ name: 'living_body_capabilities', arguments: { response_format: 'json' } });
   assert.equal(caps.structuredContent?.unofficial, true);
-  assert.equal(caps.structuredContent?.tools?.length, 6);
+  assert.equal(caps.structuredContent?.tools?.length, 9);
   assert.equal(caps.structuredContent?.per_connector_availability_matrix?.length, 15);
   const flow = caps.structuredContent?.recommended_agent_flow ?? [];
-  assert.ok(flow.some((step) => step.includes('living_body_status')));
+  assert.ok(flow.some((step) => step.includes('living_body_status') || step.includes('living_body_agent_manifest')));
+
+  const manifest = await client.callTool({ name: 'living_body_agent_manifest', arguments: { response_format: 'json' } });
+  assert.ok(Array.isArray(manifest.structuredContent?.recommended_first_calls));
+  assert.ok(manifest.structuredContent?.recommended_first_calls.includes('living_body_agent_manifest'));
+
+  const conn = await client.callTool({ name: 'living_body_connection_status', arguments: { response_format: 'json' } });
+  assert.equal(typeof conn.structuredContent?.ok, 'boolean');
+  assert.equal(typeof conn.structuredContent?.total_installed, 'number');
+
+  const inv = await client.callTool({ name: 'living_body_data_inventory', arguments: { response_format: 'json' } });
+  assert.equal(inv.structuredContent?.kind, 'data_inventory');
+  assert.ok(inv.structuredContent?.domains?.length >= 1);
+
+  const resources = await client.listResources();
+  assert.ok(resources.resources?.length >= 3, 'expected agent-facing resources');
 
   const hc = await client.callTool({ name: 'living_body_health_check', arguments: { response_format: 'json' } });
   assert.equal(hc.structuredContent?.total_known, 15);

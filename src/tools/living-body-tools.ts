@@ -16,9 +16,12 @@ import {
 import { composeAcrossDetected, normalize } from "../services/composer.js";
 import { detect, installHint } from "../services/detector.js";
 import { bulletList, makeError, makeResponse } from "../services/format.js";
+import { buildAgentManifest, parseAgentClientName } from "../services/agent-manifest.js";
 import { buildCapabilities } from "../services/capabilities.js";
+import { buildDataInventory } from "../services/inventory.js";
 import { buildDailyBriefMarkdown, synthesize } from "../services/synthesizer.js";
 import type { PrivacyMode } from "../types.js";
+import { z } from "zod";
 
 function resolvePrivacyMode(input: PrivacyMode | undefined, explicit_user_intent: boolean): PrivacyMode {
   if (input === "raw" && !explicit_user_intent) return "structured";
@@ -26,6 +29,97 @@ function resolvePrivacyMode(input: PrivacyMode | undefined, explicit_user_intent
 }
 
 export function registerLivingBodyTools(server: McpServer): void {
+  server.registerTool(
+    "living_body_agent_manifest",
+    {
+      title: "Living Body — Agent Manifest",
+      description: "Machine-readable install and operating instructions for AI agents. Call first when onboarding.",
+      inputSchema: z.object({
+        client: z.enum(["generic", "claude", "cursor", "windsurf", "hermes", "openclaw", "codex"]).default("generic"),
+        response_format: z.enum(["markdown", "json"]).default("json")
+      }).strict().shape,
+      annotations: { readOnlyHint: true, destructiveHint: false, idempotentHint: true, openWorldHint: false }
+    },
+    async (params) => {
+      try {
+        const client = parseAgentClientName(params.client ?? "generic");
+        const out = buildAgentManifest(client);
+        return makeResponse(
+          out,
+          params.response_format,
+          bulletList("Living Body — Agent Manifest", {
+            package: out.package.name,
+            version: out.package.version,
+            first_calls: out.recommended_first_calls,
+            tools: out.tools.length
+          })
+        );
+      } catch (error) {
+        return makeError((error as Error).message);
+      }
+    }
+  );
+
+  server.registerTool(
+    "living_body_connection_status",
+    {
+      title: "Living Body — Connection Status",
+      description: "Ready/not-ready snapshot of local connector detection without calling vendor APIs or child data tools.",
+      inputSchema: StatusInputSchema.shape,
+      annotations: { readOnlyHint: true, destructiveHint: false, idempotentHint: true, openWorldHint: false }
+    },
+    async (params) => {
+      try {
+        const result = detect();
+        const total_active = result.detected.filter((d) => d.status === "active").length;
+        const out = {
+          ok: result.detected.length > 0,
+          ready_for_composition: total_active > 0 || result.detected.length > 0,
+          generated_at: new Date().toISOString(),
+          total_installed: result.detected.length,
+          total_active,
+          total_missing: result.missing.length,
+          detected: result.detected,
+          missing: result.missing,
+          next_steps: result.detected.length
+            ? ["Call living_body_compose_context or living_body_ask with explicit_user_intent=true."]
+            : ["Install at least one wellness connector (npx -y whoop-mcp-unofficial setup).", "Re-run living_body_connection_status."]
+        };
+        return makeResponse(out, params.response_format, bulletList("Living Body — Connection Status", {
+          ok: out.ok,
+          ready_for_composition: out.ready_for_composition,
+          total_installed: out.total_installed,
+          total_active: out.total_active,
+          total_missing: out.total_missing
+        }));
+      } catch (error) {
+        return makeError((error as Error).message);
+      }
+    }
+  );
+
+  server.registerTool(
+    "living_body_data_inventory",
+    {
+      title: "Living Body — Data Inventory",
+      description: "Static inventory of composed domains, known connectors, privacy modes and recommended first calls. No live child calls.",
+      inputSchema: StatusInputSchema.shape,
+      annotations: { readOnlyHint: true, destructiveHint: false, idempotentHint: true, openWorldHint: false }
+    },
+    async (params) => {
+      try {
+        const out = buildDataInventory();
+        return makeResponse(out, params.response_format, bulletList("Living Body — Data Inventory", {
+          domains: out.domains.map((d) => d.id),
+          known_connectors: out.known_connectors.length,
+          first_calls: out.recommended_first_calls
+        }));
+      } catch (error) {
+        return makeError((error as Error).message);
+      }
+    }
+  );
+
   server.registerTool(
     "living_body_status",
     {

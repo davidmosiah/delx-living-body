@@ -1,3 +1,14 @@
+## 0.3.1 - 2026-07-30
+
+### Added
+
+- Agent-readiness surface: `living_body_agent_manifest`, `living_body_connection_status`, `living_body_data_inventory` plus MCP resources for inventory/manifest/capabilities/connection-status.
+- Aligns with mcp-scorecard discovery checks (score was 77/C without these tools).
+
+### Fixed
+
+- `SERVER_VERSION` drift (constants still said 0.2.1 while package was 0.3.0).
+
 # Changelog
 
 All notable changes to `delx-living-body` are documented here.
