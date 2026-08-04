@@ -1,3 +1,8 @@
+## 0.3.4 - 2026-08-04
+
+### Changed
+- Child connector spawns and install hints now use **pinned** `npx -y package@version` (aligned with Hermes/OpenClaw presets). Google Health children resolve to `google-health-mcp-unofficial@0.7.3`; nourish to `wellness-nourish@0.8.0`.
+
 ## 0.3.3 - 2026-07-30
 
 ### Added / Fixed

@@ -40,7 +40,12 @@ export function buildAgentManifest(client: AgentClientName = "generic") {
       pinned_install_command: `npx -y ${PINNED_NPM_PACKAGE}`,
       binary: "living-body-mcp-server"
     },
-    composes: KNOWN_CONNECTORS.map((c) => ({ id: c.id, package: c.package, display_name: c.display_name })),
+    composes: KNOWN_CONNECTORS.map((c) => ({
+      id: c.id,
+      package: c.package,
+      package_version: c.packageVersion,
+      display_name: c.display_name
+    })),
     tools: TOOLS,
     agent_rules: [
       "Call living_body_agent_manifest or living_body_connection_status on first contact.",

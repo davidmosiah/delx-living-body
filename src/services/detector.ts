@@ -187,5 +187,5 @@ export function getKnownConnector(id: string): KnownConnector | undefined {
 }
 
 export function installHint(connector: KnownConnector): string {
-  return `npx -y ${connector.package} setup`;
+  return `npx -y ${connector.package}@${connector.packageVersion} setup`;
 }

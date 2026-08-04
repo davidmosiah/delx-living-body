@@ -45,6 +45,7 @@ export function buildCapabilities() {
     per_connector_availability_matrix: KNOWN_CONNECTORS.map((c) => ({
       id: c.id,
       package: c.package,
+      package_version: c.packageVersion,
       display_name: c.display_name,
       category: c.category,
       auth_shape: c.auth_shape,

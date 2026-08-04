@@ -28,6 +28,7 @@ export function buildDataInventory() {
     known_connectors: KNOWN_CONNECTORS.map((c) => ({
       id: c.id,
       package: c.package,
+      package_version: c.packageVersion,
       display_name: c.display_name,
       category: c.category,
       auth_shape: c.auth_shape

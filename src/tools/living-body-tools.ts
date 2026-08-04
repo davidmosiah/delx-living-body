@@ -83,7 +83,7 @@ export function registerLivingBodyTools(server: McpServer): void {
           missing: result.missing,
           next_steps: result.detected.length
             ? ["Call living_body_compose_context or living_body_ask with explicit_user_intent=true."]
-            : ["Install at least one wellness connector (npx -y whoop-mcp-unofficial setup).", "Re-run living_body_connection_status."]
+            : ["Install at least one wellness connector (e.g. npx -y whoop-mcp-unofficial@0.6.0 setup).", "Re-run living_body_connection_status."]
         };
         return makeResponse(out, params.response_format, bulletList("Living Body — Connection Status", {
           ok: out.ok,
@@ -318,6 +318,7 @@ export function registerLivingBodyTools(server: McpServer): void {
           return {
             id: c.id,
             package: c.package,
+            package_version: c.packageVersion,
             display_name: c.display_name,
             status,
             category: c.category,

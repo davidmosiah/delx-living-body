@@ -115,6 +115,7 @@ export const HealthCheckInputSchema = z.object({
 export const HealthCheckEntrySchema = z.object({
   id: z.string(),
   package: z.string(),
+  package_version: z.string(),
   display_name: z.string(),
   status: z.enum(["active", "detected", "missing", "timeout", "error"]),
   category: z.string(),
@@ -159,6 +160,7 @@ export const CapabilitiesOutputSchema = z.object({
   per_connector_availability_matrix: z.array(z.object({
     id: z.string(),
     package: z.string(),
+    package_version: z.string(),
     display_name: z.string(),
     category: z.string(),
     auth_shape: z.string(),

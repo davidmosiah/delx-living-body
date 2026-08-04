@@ -1,5 +1,5 @@
 export const SERVER_NAME = "living-body-mcp-server";
-export const SERVER_VERSION = "0.3.3";
+export const SERVER_VERSION = "0.3.4";
 export const NPM_PACKAGE_NAME = "delx-living-body";
 export const PINNED_NPM_PACKAGE = `${NPM_PACKAGE_NAME}@${SERVER_VERSION}`;
 export const MCP_NAME = "io.github.davidmosiah/delx-living-body";
@@ -20,6 +20,11 @@ export interface KnownConnector {
   id: string;
   /** npm package name */
   package: string;
+  /**
+   * Pinned npm version for reproducible child spawns (`npx -y pkg@ver`).
+   * Keep in lockstep with delx-wellness-hermes / openclaw connector presets.
+   */
+  packageVersion: string;
   /** Friendly name */
   display_name: string;
   /** Local home dir under HOME (~/.<vendor>-mcp/) */
@@ -52,6 +57,7 @@ export const KNOWN_CONNECTORS: KnownConnector[] = [
   {
     id: "whoop",
     package: "whoop-mcp-unofficial",
+    packageVersion: "0.6.0",
     display_name: "WHOOP",
     home_dir: ".whoop-mcp",
     context_tool: "whoop_wellness_context",
@@ -62,6 +68,7 @@ export const KNOWN_CONNECTORS: KnownConnector[] = [
   {
     id: "oura",
     package: "oura-mcp-unofficial",
+    packageVersion: "0.6.1",
     display_name: "Oura",
     home_dir: ".oura-mcp",
     context_tool: "oura_wellness_context",
@@ -72,6 +79,7 @@ export const KNOWN_CONNECTORS: KnownConnector[] = [
   {
     id: "garmin",
     package: "garmin-mcp-unofficial",
+    packageVersion: "0.7.0",
     display_name: "Garmin",
     home_dir: ".garmin-mcp",
     context_tool: "garmin_wellness_context",
@@ -82,6 +90,7 @@ export const KNOWN_CONNECTORS: KnownConnector[] = [
   {
     id: "strava",
     package: "strava-mcp-unofficial",
+    packageVersion: "0.5.0",
     display_name: "Strava",
     home_dir: ".strava-mcp",
     context_tool: "strava_training_context",
@@ -92,6 +101,7 @@ export const KNOWN_CONNECTORS: KnownConnector[] = [
   {
     id: "fitbit",
     package: "fitbit-mcp-unofficial",
+    packageVersion: "0.5.0",
     display_name: "Fitbit",
     home_dir: ".fitbit-mcp",
     context_tool: "fitbit_wellness_context",
@@ -102,6 +112,7 @@ export const KNOWN_CONNECTORS: KnownConnector[] = [
   {
     id: "google_health",
     package: "google-health-mcp-unofficial",
+    packageVersion: "0.7.3",
     display_name: "Google Health Connect",
     home_dir: ".google-health-mcp",
     context_tool: "google_health_wellness_context",
@@ -112,6 +123,7 @@ export const KNOWN_CONNECTORS: KnownConnector[] = [
   {
     id: "withings",
     package: "withings-mcp-unofficial",
+    packageVersion: "0.5.0",
     display_name: "Withings",
     home_dir: ".withings-mcp",
     context_tool: "withings_wellness_context",
@@ -122,6 +134,7 @@ export const KNOWN_CONNECTORS: KnownConnector[] = [
   {
     id: "apple_health",
     package: "apple-health-mcp-unofficial",
+    packageVersion: "0.7.1",
     display_name: "Apple Health",
     home_dir: ".apple-health-mcp",
     context_tool: "apple_health_wellness_context",
@@ -134,6 +147,7 @@ export const KNOWN_CONNECTORS: KnownConnector[] = [
   {
     id: "samsung_health",
     package: "samsung-health-mcp-unofficial",
+    packageVersion: "0.7.1",
     display_name: "Samsung Health",
     home_dir: ".samsung-health-mcp",
     context_tool: "samsung_health_wellness_context",
@@ -146,6 +160,7 @@ export const KNOWN_CONNECTORS: KnownConnector[] = [
   {
     id: "polar",
     package: "polar-mcp-unofficial",
+    packageVersion: "0.4.0",
     display_name: "Polar",
     home_dir: ".polar-mcp",
     context_tool: "polar_wellness_context",
@@ -156,6 +171,7 @@ export const KNOWN_CONNECTORS: KnownConnector[] = [
   {
     id: "eight_sleep",
     package: "eight-sleep-mcp-unofficial",
+    packageVersion: "0.2.8",
     display_name: "Eight Sleep",
     home_dir: ".eight-sleep-mcp",
     context_tool: "eight_sleep_wellness_context",
@@ -166,6 +182,7 @@ export const KNOWN_CONNECTORS: KnownConnector[] = [
   {
     id: "nourish",
     package: "wellness-nourish",
+    packageVersion: "0.8.0",
     display_name: "Nourish (nutrition)",
     home_dir: ".wellness-nourish",
     context_tool: "nourish_wellness_context",
@@ -176,6 +193,7 @@ export const KNOWN_CONNECTORS: KnownConnector[] = [
   {
     id: "air",
     package: "wellness-air",
+    packageVersion: "0.7.0",
     display_name: "Air (environment)",
     home_dir: ".wellness-air",
     context_tool: "air_wellness_context",
@@ -186,6 +204,7 @@ export const KNOWN_CONNECTORS: KnownConnector[] = [
   {
     id: "cycle_coach",
     package: "wellness-cycle-coach",
+    packageVersion: "0.4.0",
     display_name: "Cycle Coach",
     home_dir: ".wellness-cycle-coach",
     context_tool: "cycle_wellness_context",
@@ -197,6 +216,7 @@ export const KNOWN_CONNECTORS: KnownConnector[] = [
   {
     id: "cgm",
     package: "wellness-cgm-mcp",
+    packageVersion: "0.6.1",
     display_name: "Continuous Glucose Monitor",
     home_dir: ".wellness-cgm-mcp",
     context_tool: "cgm_wellness_context",
@@ -209,5 +229,10 @@ export const KNOWN_CONNECTORS: KnownConnector[] = [
 export const CONNECTOR_BY_ID: Record<string, KnownConnector> = Object.fromEntries(
   KNOWN_CONNECTORS.map((c) => [c.id, c])
 );
+
+/** `pkg@version` for npx -y installs / child MCP spawns. */
+export function connectorNpxSpec(connector: Pick<KnownConnector, "package" | "packageVersion">): string {
+  return `${connector.package}@${connector.packageVersion}`;
+}
 
 export const PROFILE_PATH_REL = ".delx-wellness/profile.json";

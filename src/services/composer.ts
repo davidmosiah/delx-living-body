@@ -3,6 +3,7 @@ import { StdioClientTransport } from "@modelcontextprotocol/sdk/client/stdio.js"
 import {
   CONTEXT_CONTRACT_VERSION,
   DEFAULT_CHILD_TIMEOUT_MS,
+  connectorNpxSpec,
   KnownConnector
 } from "../constants.js";
 import { getKnownConnector } from "./detector.js";
@@ -19,8 +20,8 @@ function childCommand(connector: KnownConnector): { command: string; args: strin
     return { command: parts[0]!, args: parts.slice(1) };
   }
   const useNpx = process.env.DELX_LIVING_BODY_NPM_RUNNER ?? "npx";
-  // npx requires "-y" to avoid prompts
-  return { command: useNpx, args: ["-y", connector.package] };
+  // npx requires "-y" to avoid prompts; pin version for reproducible child installs
+  return { command: useNpx, args: ["-y", connectorNpxSpec(connector)] };
 }
 
 function childEnv(connector: KnownConnector, options: { probeOnly: boolean; privacyMode: PrivacyMode }): Record<string, string> {
