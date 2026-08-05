@@ -1,3 +1,18 @@
+
+/** Prefer agent-safe-series tools when the caller asks for dense shape. */
+export function resolveConnectorTool(
+  connector: { context_tool: string | null; daily_summary_tool: string | null; series_tool?: string | null },
+  options: { tool?: "context" | "daily_summary" | "series" } = {}
+): string | null {
+  if (options.tool === "series") {
+    return connector.series_tool ?? connector.context_tool;
+  }
+  if (options.tool === "daily_summary") {
+    return connector.daily_summary_tool ?? connector.context_tool;
+  }
+  return connector.context_tool;
+}
+
 import { Client } from "@modelcontextprotocol/sdk/client/index.js";
 import { StdioClientTransport } from "@modelcontextprotocol/sdk/client/stdio.js";
 import {
@@ -146,7 +161,7 @@ export interface ComposeOptions {
   privacyMode: PrivacyMode;
   sources?: string[];
   timeoutMs?: number;
-  tool?: "context" | "daily_summary";
+  tool?: "context" | "daily_summary" | "series";
   toolArgs?: Record<string, unknown>;
 }
 
@@ -162,9 +177,9 @@ export async function composeAcrossDetected(
   const results = await Promise.all(
     filtered.map((d) => {
       const connector = getKnownConnector(d.id);
-      const toolName = options.tool === "daily_summary"
-        ? connector?.daily_summary_tool
-        : connector?.context_tool;
+      const toolName = connector
+        ? resolveConnectorTool(connector, { tool: options.tool === "series" ? "series" : options.tool === "daily_summary" ? "daily_summary" : "context" })
+        : null;
       return callChild(d.id, {
         privacyMode: options.privacyMode,
         timeoutMs: options.timeoutMs,

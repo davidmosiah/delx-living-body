@@ -33,6 +33,8 @@ export interface KnownConnector {
   context_tool: string | null;
   /** Tool name on the child server that returns daily_summary */
   daily_summary_tool: string | null;
+  /** Prefer for dense effort/HR shape when present (agent-safe-series/v1). */
+  series_tool: string | null;
   /** Shape of credential storage */
   auth_shape: ConnectorAuthShape;
   /** Optional env var that points at an export file (apple/samsung) */
@@ -62,6 +64,7 @@ export const KNOWN_CONNECTORS: KnownConnector[] = [
     home_dir: ".whoop-mcp",
     context_tool: "whoop_wellness_context",
     daily_summary_tool: "whoop_daily_summary",
+    series_tool: null,
     auth_shape: "tokens.json",
     category: "recovery"
   },
@@ -73,6 +76,7 @@ export const KNOWN_CONNECTORS: KnownConnector[] = [
     home_dir: ".oura-mcp",
     context_tool: "oura_wellness_context",
     daily_summary_tool: "oura_daily_summary",
+    series_tool: null,
     auth_shape: "tokens.json",
     category: "sleep"
   },
@@ -84,6 +88,7 @@ export const KNOWN_CONNECTORS: KnownConnector[] = [
     home_dir: ".garmin-mcp",
     context_tool: "garmin_wellness_context",
     daily_summary_tool: "garmin_daily_summary",
+    series_tool: "garmin_activity_series",
     auth_shape: "tokens.json",
     category: "recovery"
   },
@@ -95,6 +100,7 @@ export const KNOWN_CONNECTORS: KnownConnector[] = [
     home_dir: ".strava-mcp",
     context_tool: "strava_training_context",
     daily_summary_tool: "strava_daily_summary",
+    series_tool: "strava_activity_series",
     auth_shape: "tokens.json",
     category: "training"
   },
@@ -106,6 +112,7 @@ export const KNOWN_CONNECTORS: KnownConnector[] = [
     home_dir: ".fitbit-mcp",
     context_tool: "fitbit_wellness_context",
     daily_summary_tool: "fitbit_daily_summary",
+    series_tool: "fitbit_heart_series",
     auth_shape: "tokens.json",
     category: "recovery"
   },
@@ -117,6 +124,7 @@ export const KNOWN_CONNECTORS: KnownConnector[] = [
     home_dir: ".google-health-mcp",
     context_tool: "google_health_wellness_context",
     daily_summary_tool: "google_health_daily_summary",
+    series_tool: null,
     auth_shape: "tokens.json",
     category: "multi"
   },
@@ -128,6 +136,7 @@ export const KNOWN_CONNECTORS: KnownConnector[] = [
     home_dir: ".withings-mcp",
     context_tool: "withings_wellness_context",
     daily_summary_tool: "withings_daily_summary",
+    series_tool: null,
     auth_shape: "tokens.json",
     category: "multi"
   },
@@ -139,6 +148,7 @@ export const KNOWN_CONNECTORS: KnownConnector[] = [
     home_dir: ".apple-health-mcp",
     context_tool: "apple_health_wellness_context",
     daily_summary_tool: "apple_health_daily_summary",
+    series_tool: null,
     auth_shape: "export-path",
     export_env_var: "APPLE_HEALTH_EXPORT_PATH",
     default_export_path: ".apple-health-mcp/export.xml",
@@ -152,6 +162,7 @@ export const KNOWN_CONNECTORS: KnownConnector[] = [
     home_dir: ".samsung-health-mcp",
     context_tool: "samsung_health_wellness_context",
     daily_summary_tool: "samsung_health_daily_summary",
+    series_tool: null,
     auth_shape: "export-path",
     export_env_var: "SAMSUNG_HEALTH_EXPORT_PATH",
     default_export_path: ".samsung-health-mcp/export.zip",
@@ -165,6 +176,7 @@ export const KNOWN_CONNECTORS: KnownConnector[] = [
     home_dir: ".polar-mcp",
     context_tool: "polar_wellness_context",
     daily_summary_tool: "polar_daily_summary",
+    series_tool: "polar_heart_series",
     auth_shape: "tokens.json",
     category: "training"
   },
@@ -176,6 +188,7 @@ export const KNOWN_CONNECTORS: KnownConnector[] = [
     home_dir: ".eight-sleep-mcp",
     context_tool: "eight_sleep_wellness_context",
     daily_summary_tool: "eight_sleep_daily_summary",
+    series_tool: null,
     auth_shape: "config.json",
     category: "sleep"
   },
@@ -187,6 +200,7 @@ export const KNOWN_CONNECTORS: KnownConnector[] = [
     home_dir: ".wellness-nourish",
     context_tool: "nourish_wellness_context",
     daily_summary_tool: "nourish_daily_summary",
+    series_tool: null,
     auth_shape: "config.json",
     category: "nutrition"
   },
@@ -198,6 +212,7 @@ export const KNOWN_CONNECTORS: KnownConnector[] = [
     home_dir: ".wellness-air",
     context_tool: "air_wellness_context",
     daily_summary_tool: "air_daily_summary",
+    series_tool: null,
     auth_shape: "config.json",
     category: "environment"
   },
@@ -209,6 +224,7 @@ export const KNOWN_CONNECTORS: KnownConnector[] = [
     home_dir: ".wellness-cycle-coach",
     context_tool: "cycle_wellness_context",
     daily_summary_tool: "cycle_daily_summary",
+    series_tool: null,
     auth_shape: "stateless",
     category: "cycle",
     stateless: true
@@ -221,6 +237,7 @@ export const KNOWN_CONNECTORS: KnownConnector[] = [
     home_dir: ".wellness-cgm-mcp",
     context_tool: "cgm_wellness_context",
     daily_summary_tool: "cgm_daily_summary",
+    series_tool: null,
     auth_shape: "tokens.json",
     category: "glucose"
   }

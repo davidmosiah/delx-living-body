@@ -165,7 +165,8 @@ export const CapabilitiesOutputSchema = z.object({
     category: z.string(),
     auth_shape: z.string(),
     context_tool: z.string().nullable(),
-    daily_summary_tool: z.string().nullable()
+    daily_summary_tool: z.string().nullable(),
+    series_tool: z.string().nullable().optional()
   }).strict()),
   recommended_agent_flow: z.array(z.string()),
   contribution_paths: z.array(z.string()),
