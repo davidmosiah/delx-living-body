@@ -31,6 +31,41 @@ export function classifyQuestion(question: string): IntentClass {
   return "daily_overview";
 }
 
+/**
+ * Choose the child-compose tool mode for a question.
+ * Dense effort/HR shape questions prefer agent-safe-series tools on children
+ * that declare `series_tool` (garmin/strava/fitbit/polar).
+ */
+export function selectComposeToolForQuestion(
+  question: string
+): "context" | "daily_summary" | "series" {
+  const text = question.toLowerCase();
+  if (
+    matches(text, [
+      "series",
+      "time-series",
+      "time series",
+      "hr shape",
+      "heart rate shape",
+      "effort over time",
+      "effort shape",
+      "workout shape",
+      "activity series",
+      "heart series",
+      "hr curve",
+      "heart rate over",
+      "downsample",
+      "max_points",
+      "agent-safe-series",
+      "continuous samples",
+      "intraday heart"
+    ])
+  ) {
+    return "series";
+  }
+  return "context";
+}
+
 function matches(text: string, needles: string[]): boolean {
   return needles.some((needle) => text.includes(needle));
 }

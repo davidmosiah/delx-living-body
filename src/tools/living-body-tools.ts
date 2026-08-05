@@ -19,7 +19,7 @@ import { bulletList, makeError, makeResponse } from "../services/format.js";
 import { buildAgentManifest, parseAgentClientName } from "../services/agent-manifest.js";
 import { buildCapabilities } from "../services/capabilities.js";
 import { buildDataInventory } from "../services/inventory.js";
-import { buildDailyBriefMarkdown, synthesize } from "../services/synthesizer.js";
+import { buildDailyBriefMarkdown, selectComposeToolForQuestion, synthesize } from "../services/synthesizer.js";
 import type { PrivacyMode } from "../types.js";
 import { z } from "zod";
 
@@ -166,9 +166,12 @@ export function registerLivingBodyTools(server: McpServer): void {
       try {
         const detection = detect();
         const privacyMode = resolvePrivacyMode(params.privacy_mode, params.explicit_user_intent === true);
+        // Dense effort/HR-shape questions route to child agent-safe-series tools.
+        const childTool = selectComposeToolForQuestion(params.question);
         const results = await composeAcrossDetected(detection.detected, {
           privacyMode,
-          sources: params.sources
+          sources: params.sources,
+          tool: childTool
         });
         const composition = normalize(results);
         const synthesis = synthesize(params.question, composition);
@@ -259,7 +262,8 @@ export function registerLivingBodyTools(server: McpServer): void {
         const privacyMode = resolvePrivacyMode(params.privacy_mode, true);
         const results = await composeAcrossDetected(detection.detected, {
           privacyMode,
-          sources: params.sources
+          sources: params.sources,
+          tool: params.child_tool ?? "context"
         });
         const composition = normalize(results);
         const out = {

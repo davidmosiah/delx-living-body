@@ -85,6 +85,12 @@ export const DailyBriefOutputSchema = z.object({
 
 export const ComposeContextInputSchema = z.object({
   sources: z.array(ConnectorIdSchema).optional(),
+  /**
+   * Which child tool family to call. `series` uses each connector's
+   * agent-safe-series tool when present (garmin_activity_series, etc.).
+   */
+  child_tool: z.enum(["context", "daily_summary", "series"]).optional()
+    .describe("Child compose mode. series prefers agent-safe-series tools when the connector declares one."),
   explicit_user_intent: ExplicitUserIntentSchema,
   privacy_mode: PrivacyModeValueSchema.optional(),
   response_format: ResponseFormatSchema
