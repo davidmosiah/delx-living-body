@@ -43,3 +43,6 @@ A **meta-MCP server**: it composes other locally-installed Delx Wellness connect
 - "no sources used" → run `living_body_health_check`. Probably nothing is installed or every child timed out.
 - A child timed out → its package may be slow to npx-install. Pre-install it: `npx -y <package> setup`.
 - Cache feels stale → `DELX_LIVING_BODY_NO_CACHE=true` or delete `~/.delx-living-body/cache.sqlite`.
+
+## Dense series
+When child connectors expose `*_series` tools (agent-safe-series/v1), prefer them over raw stream dumps.

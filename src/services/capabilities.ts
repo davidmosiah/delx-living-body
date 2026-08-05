@@ -53,6 +53,7 @@ export function buildCapabilities() {
       daily_summary_tool: c.daily_summary_tool
     })),
     recommended_agent_flow: [
+      "Prefer connector series tools (agent-safe-series/v1) over raw stream dumps when child connectors expose them.",
       "Call living_body_agent_manifest once to discover install and operating rules.",
       "Call living_body_connection_status or living_body_status to see which connectors are installed.",
       "Call living_body_capabilities or living_body_data_inventory for the surface map.",

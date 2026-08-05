@@ -48,6 +48,7 @@ export function buildAgentManifest(client: AgentClientName = "generic") {
     })),
     tools: TOOLS,
     agent_rules: [
+      "Prefer agent-safe-series tools over raw dense sample dumps from child connectors.",
       "Call living_body_agent_manifest or living_body_connection_status on first contact.",
       "Call living_body_status before living_body_ask to know which connectors are installed.",
       "Always pass explicit_user_intent: true on living_body_ask — it spawns child MCP processes.",

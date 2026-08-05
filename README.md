@@ -214,3 +214,6 @@ Outputs are operational context for training/recovery/sleep/nutrition agents. No
 ## License
 
 MIT — see [LICENSE](LICENSE). Built by [David Mosiah](https://github.com/davidmosiah).
+
+## Dense series
+When child connectors expose `*_series` tools (agent-safe-series/v1), prefer them over raw stream dumps.

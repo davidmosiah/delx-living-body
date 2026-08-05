@@ -12,6 +12,8 @@ export type IntentClass =
   | "daily_overview";
 
 /**
+ * Prefer child agent-safe-series tools over raw dense dumps when composing.
+ *
  * Classify the user's question into an intent. Rule-based on purpose — this
  * server intentionally does NOT call an LLM. Synthesis is offline and
  * deterministic so downstream agents can reason on top of a stable trace.
