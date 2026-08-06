@@ -60,6 +60,8 @@ export const AskOutputSchema = z.object({
     status: z.enum(["timeout", "error", "skipped"]),
     note: z.string().optional()
   }).strict()),
+  /** Which child tool family was selected for compose (series when dense shape detected). */
+  child_tool_mode: z.enum(["context", "daily_summary", "series"]).optional(),
   generated_at: z.string()
 }).strict();
 

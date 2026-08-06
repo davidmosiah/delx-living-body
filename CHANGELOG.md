@@ -1,3 +1,7 @@
+## Unreleased
+
+- living_body_ask: emit child_tool_mode + local series routing log (no PHI)
+
 ## 0.3.4 - 2026-08-04
 
 ### Changed

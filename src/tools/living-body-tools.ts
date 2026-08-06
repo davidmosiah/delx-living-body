@@ -168,6 +168,16 @@ export function registerLivingBodyTools(server: McpServer): void {
         const privacyMode = resolvePrivacyMode(params.privacy_mode, params.explicit_user_intent === true);
         // Dense effort/HR-shape questions route to child agent-safe-series tools.
         const childTool = selectComposeToolForQuestion(params.question);
+        // OSS-200 #27: local operator log when series routing is selected (no PHI).
+        if (childTool === "series") {
+          console.error(
+            JSON.stringify({
+              event: "living_body_child_tool",
+              child_tool: "series",
+              reason: "dense_effort_or_hr_shape_question"
+            })
+          );
+        }
         const results = await composeAcrossDetected(detection.detected, {
           privacyMode,
           sources: params.sources,
@@ -182,6 +192,7 @@ export function registerLivingBodyTools(server: McpServer): void {
           confidence: synthesis.confidence,
           data_snapshot: synthesis.data_snapshot,
           sources_failed: composition.failures,
+          child_tool_mode: childTool,
           generated_at: new Date().toISOString()
         };
         const markdown = [
