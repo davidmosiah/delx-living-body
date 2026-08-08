@@ -1,6 +1,11 @@
-## Unreleased
+## 0.3.5 - 2026-08-08
 
-- living_body_ask: emit child_tool_mode + local series routing log (no PHI)
+### Added
+- `living_body_ask` returns `child_tool_mode` and logs series routing locally (no PHI).
+- Production series routing for dense effort/HR questions (child `series_tool`).
+
+### Changed
+- Child connector pins: garmin `0.7.2`, whoop `0.6.1`, strava/fitbit `0.6.0`, polar `0.5.0`, withings `0.5.1`.
 
 ## 0.3.4 - 2026-08-04
 

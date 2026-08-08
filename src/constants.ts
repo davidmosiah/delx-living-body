@@ -1,5 +1,5 @@
 export const SERVER_NAME = "living-body-mcp-server";
-export const SERVER_VERSION = "0.3.4";
+export const SERVER_VERSION = "0.3.5";
 export const NPM_PACKAGE_NAME = "delx-living-body";
 export const PINNED_NPM_PACKAGE = `${NPM_PACKAGE_NAME}@${SERVER_VERSION}`;
 export const MCP_NAME = "io.github.davidmosiah/delx-living-body";
@@ -59,7 +59,7 @@ export const KNOWN_CONNECTORS: KnownConnector[] = [
   {
     id: "whoop",
     package: "whoop-mcp-unofficial",
-    packageVersion: "0.6.0",
+    packageVersion: "0.6.1",
     display_name: "WHOOP",
     home_dir: ".whoop-mcp",
     context_tool: "whoop_wellness_context",
@@ -83,7 +83,7 @@ export const KNOWN_CONNECTORS: KnownConnector[] = [
   {
     id: "garmin",
     package: "garmin-mcp-unofficial",
-    packageVersion: "0.7.0",
+    packageVersion: "0.7.2",
     display_name: "Garmin",
     home_dir: ".garmin-mcp",
     context_tool: "garmin_wellness_context",
@@ -95,7 +95,7 @@ export const KNOWN_CONNECTORS: KnownConnector[] = [
   {
     id: "strava",
     package: "strava-mcp-unofficial",
-    packageVersion: "0.5.0",
+    packageVersion: "0.6.0",
     display_name: "Strava",
     home_dir: ".strava-mcp",
     context_tool: "strava_training_context",
@@ -107,7 +107,7 @@ export const KNOWN_CONNECTORS: KnownConnector[] = [
   {
     id: "fitbit",
     package: "fitbit-mcp-unofficial",
-    packageVersion: "0.5.0",
+    packageVersion: "0.6.0",
     display_name: "Fitbit",
     home_dir: ".fitbit-mcp",
     context_tool: "fitbit_wellness_context",
@@ -131,7 +131,7 @@ export const KNOWN_CONNECTORS: KnownConnector[] = [
   {
     id: "withings",
     package: "withings-mcp-unofficial",
-    packageVersion: "0.5.0",
+    packageVersion: "0.5.1",
     display_name: "Withings",
     home_dir: ".withings-mcp",
     context_tool: "withings_wellness_context",
@@ -171,7 +171,7 @@ export const KNOWN_CONNECTORS: KnownConnector[] = [
   {
     id: "polar",
     package: "polar-mcp-unofficial",
-    packageVersion: "0.4.0",
+    packageVersion: "0.5.0",
     display_name: "Polar",
     home_dir: ".polar-mcp",
     context_tool: "polar_wellness_context",
