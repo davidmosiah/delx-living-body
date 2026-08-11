@@ -38,6 +38,11 @@
 
 # Changelog
 
+## 0.3.6
+
+- Security: raise `hono` override to **4.13.1** (clears moderate MCP SDK transitive advisories); `@hono/node-server@2.1.0`.
+
+
 All notable changes to `delx-living-body` are documented here.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and this project follows semantic versioning.
