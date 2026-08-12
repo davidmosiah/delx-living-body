@@ -6,6 +6,7 @@
 [![GitHub Release](https://img.shields.io/github/v/release/davidmosiah/delx-living-body?label=release)](https://github.com/davidmosiah/delx-living-body/releases/latest)
 [![npm downloads](https://img.shields.io/npm/dm/delx-living-body)](https://www.npmjs.com/package/delx-living-body)
 [![license](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![conduct](https://img.shields.io/badge/code%20of%20conduct-Contributor%20Covenant-ff69b4.svg)](CODE_OF_CONDUCT.md)
 [![Delx Wellness](https://img.shields.io/badge/part%20of-Delx%20Wellness-0EA5A3)](https://github.com/davidmosiah/delx-wellness)
 [![Verified Release Index](https://img.shields.io/badge/verified-release_index-0EA5A3)](https://github.com/davidmosiah/delx-wellness/blob/main/docs/release-index.md)
 
