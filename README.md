@@ -28,6 +28,19 @@ Delx Wellness path easier for other AI builders to find.
 
 ---
 
+## HTTP (v2 stateless)
+
+Default is **stdio**. Optional Streamable HTTP — no session id, JSON responses, loopback only:
+
+```bash
+npx -y delx-living-body --http
+# GET  http://127.0.0.1:3030/health
+# POST http://127.0.0.1:3030/mcp   (sessionless)
+```
+
+Env: `LIVING_BODY_MCP_HOST`, `LIVING_BODY_MCP_PORT`, `LIVING_BODY_MCP_TRANSPORT=http`.
+
+
 - **Try it now, no accounts** — `npx -y delx-living-body demo` ("Should I train hard today?")
 - **Run it in** Claude · Cursor · ChatGPT · Hermes · OpenClaw — see [agent setup examples](https://github.com/davidmosiah/delx-wellness/tree/main/examples)
 - **Local-first** — `delx-living-body` never reads your tokens; children read their own creds ([privacy](#privacy--security))
