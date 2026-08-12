@@ -20,6 +20,9 @@ Today, answering "should I train hard today?" forces an agent to orchestrate WHO
 
 Install it once. Get a unified body data layer. Works with whatever wellness MCPs you already have.
 
+Compose matrix (which children have `*_series` vs summary-only): [docs/compose-matrix.md](docs/compose-matrix.md).
+Pin drift: [docs/pin-drift.md](docs/pin-drift.md).
+
 If it helps your agent workflow, star the repo. Stars make the single-entry
 Delx Wellness path easier for other AI builders to find.
 
