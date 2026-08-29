@@ -3,6 +3,7 @@ import { join } from "node:path";
 import { KNOWN_CONNECTORS, NPM_PACKAGE_NAME, SERVER_VERSION } from "../constants.js";
 import { detect, installHint } from "../services/detector.js";
 import { runDemo } from "./demo.js";
+import { runToolCall } from "./tool-calls.js";
 
 export async function runCliCommand(args: string[]): Promise<number | undefined> {
   const [command, ...rest] = args;
@@ -10,6 +11,7 @@ export async function runCliCommand(args: string[]): Promise<number | undefined>
   if (command === "demo") return runDemo(rest);
   if (command === "setup") return runSetup(rest);
   if (command === "doctor" || command === "status") return runDoctor(rest);
+  if (command === "call") return runToolCall(rest);
   if (command === "version" || command === "--version" || command === "-v") {
     console.log(SERVER_VERSION);
     return 0;

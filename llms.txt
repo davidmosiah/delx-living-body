@@ -15,3 +15,6 @@ MCP command: living-body-mcp-server
 - Children read their own credentials independently — living-body never reads, forwards, or logs upstream tokens.
 - Privacy default: "structured". "raw" is only honored on living_body_ask when explicit_user_intent is true.
 - Not medical advice. Output is operational context for training/recovery/sleep/nutrition agents.
+
+Skill (same gates, no MCP client required): skill/SKILL.md
+npx -y delx-living-body call <tool> --json '{...}'

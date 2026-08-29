@@ -1,6 +1,6 @@
 {
   "name": "delx-living-body",
-  "version": "0.3.6",
+  "version": "0.3.7",
   "description": "Meta-MCP server that auto-detects and composes installed Delx Wellness connectors into a unified body data layer.",
   "type": "module",
   "bin": {
@@ -17,7 +17,8 @@
     "CONTRIBUTING.md",
     "server.json",
     "examples",
-    "llms.txt"
+    "llms.txt",
+    "skill"
   ],
   "scripts": {
     "build": "tsc -p tsconfig.json",
@@ -30,9 +31,10 @@
     "test:composer": "node scripts/test-composer.mjs",
     "test:synthesizer": "node scripts/test-synthesizer.mjs",
     "test:metadata": "node scripts/metadata-check.mjs",
-    "test": "npm run typecheck && npm run build && npm run smoke && npm run test:detector && npm run test:composer && npm run test:synthesizer && npm run demo && npm run test:metadata && npm run test:series-pref",
+    "test": "npm run typecheck && npm run build && npm run smoke && npm run test:detector && npm run test:composer && npm run test:synthesizer && npm run demo && npm run test:metadata && npm run test:series-pref && npm run test:skill-surface",
     "prepublishOnly": "npm test",
-    "test:series-pref": "node scripts/series-tool-preference-test.mjs"
+    "test:series-pref": "node scripts/series-tool-preference-test.mjs",
+    "test:skill-surface": "node scripts/test-skill-surface.mjs"
   },
   "keywords": [
     "mcp",

@@ -6,12 +6,12 @@
     "url": "https://github.com/davidmosiah/delx-living-body",
     "source": "github"
   },
-  "version": "0.3.6",
+  "version": "0.3.7",
   "packages": [
     {
       "registryType": "npm",
       "identifier": "delx-living-body",
-      "version": "0.3.6",
+      "version": "0.3.7",
       "transport": {
         "type": "stdio"
       },

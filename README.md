@@ -234,3 +234,13 @@ MIT — see [LICENSE](LICENSE). Built by [David Mosiah](https://github.com/david
 
 ## Dense series
 When child connectors expose `*_series` tools (agent-safe-series/v1), prefer them over raw stream dumps.
+
+## Skill or MCP
+
+Same package, two doors. MCP registers tools on stdio/HTTP. The [skill](skill/SKILL.md) can drive the **same** tools through the CLI when the client has no MCP:
+
+```bash
+npx -y delx-living-body call living_body_connection_status --json '{}'
+```
+
+Copy `skill/SKILL.md` into your agent skills dir.
