@@ -1,0 +1,24 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "delx-living-body",
+  "version": "0.3.7",
+  "description": "Ask one wellness question across every Delx Wellness connector the user has set up (WHOOP, Oura, Garmin, Fitbit, Strava, Apple Health, nutrition, air and more) through the local living-body meta-MCP server.",
+  "author": {
+    "name": "David Mosiah",
+    "url": "https://github.com/davidmosiah"
+  },
+  "homepage": "https://github.com/davidmosiah/delx-living-body",
+  "repository": "https://github.com/davidmosiah/delx-living-body",
+  "license": "MIT",
+  "keywords": [
+    "ai-agents",
+    "composer",
+    "delx",
+    "health",
+    "hermes",
+    "mcp",
+    "meta-mcp",
+    "model-context-protocol",
+    "wellness"
+  ]
+}
